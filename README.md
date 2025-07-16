@@ -81,7 +81,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-[addon-onnx-asr]: https://github.com/tboby/onnx-asr-addon/tree/0.1.2
+[addon-onnx-asr]: https://github.com/tboby/onnx-asr-addon/tree/v0.1.2
 [addon-doc-onnx-asr]: https://github.com/tboby/onnx-asr-addon/blob/v5.3.0/onnx-asr/DOCS.md
 [onnx-asr-issue]: https://github.com/tboby/onnx-asr-addon/issues
 [onnx-asr-aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
