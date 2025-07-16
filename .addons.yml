@@ -1,0 +1,7 @@
+---
+channel: stable
+addons:
+  adguard:
+    repository: tboby/onnx-asr-addon
+    target: onnx-asr
+    image: ghcr.io/tboby/onnx-asr/{arch}
