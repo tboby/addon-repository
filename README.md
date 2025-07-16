@@ -22,8 +22,8 @@ https://github.com/tboby/addon-repository
 ### &#10003; [ONNX ASR][addon-onnx-asr]
 
 ![Latest Version][onnx-asr-version-shield]
-![Supports aarch64 Architecture][adguard-aarch64-shield]
-![Supports amd64 Architecture][adguard-amd64-shield]
+![Supports aarch64 Architecture][onnx-asr-aarch64-shield]
+![Supports amd64 Architecture][onnx-asr-amd64-shield]
 
 Home Assistant add-on that uses onnx-asr for speech-to-text.
 
@@ -84,6 +84,10 @@ SOFTWARE.
 [addon-onnx-asr]: https://github.com/tboby/onnx-asr-addon/tree/0.1.2
 [addon-doc-onnx-asr]: https://github.com/tboby/onnx-asr-addon/blob/v5.3.0/onnx-asr/DOCS.md
 [onnx-asr-issue]: https://github.com/tboby/onnx-asr-addon/issues
+[onnx-asr-aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[onnx-asr-amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[onnx-asr-version-shield]: https://img.shields.io/badge/version-v0.1.2-blue.svg
+
 [awesome-shield]: https://img.shields.io/badge/awesome%3F-yes-brightgreen.svg
 [awesome]: https://awesome-ha.com
 [discord-ha]: https://discord.gg/c5DvZ4e
