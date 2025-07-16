@@ -16,7 +16,7 @@ When configured in auto, the multilingual mode uses 1GB at all times.
 
 Follow these steps to get the add-on installed on your system:
 
-1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
+1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**..
 2. Find the "ONNX ASR" add-on and click it.
 3. Click on the "INSTALL" button.
 

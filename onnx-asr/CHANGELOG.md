@@ -1,5 +1,5 @@
-<!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
+## What’s changed
 
-## 0.1.0
+## 🧰 Maintenance
 
-- Initial release
+- Dummy commit @tboby ([#2](https://github.com/tboby/onnx-asr-addon/pull/2))

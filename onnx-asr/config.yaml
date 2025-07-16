@@ -1,32 +1,33 @@
----
-version: 0.1.0
+version: 0.1.2
 slug: onnx-asr
 name: ONNX ASR
 description: Speech-to-text with ONNX ASR
 url: https://github.com/tboby/tboby-addons/tree/main/onnx-asr
 arch:
-  - amd64
-  - aarch64
+- amd64
+- aarch64
 init: false
 discovery:
-  - wyoming
+- wyoming
 backup_exclude:
-  - "models*"
+- models*
 map:
-  - addon_config:rw
+- addon_config:rw
 options:
   model_en: auto
   model_multilingual: none
   debug_logging: false
 schema:
-  model_en: |
-    list(none|auto|nemo-parakeet-tdt-0.6b-v2|nemo-parakeet-rnnt-0.6b|nemo-parakeet-ctc-0.6b|onnx-community/whisper-base.en|onnx-community/whisper-tiny.en|onnx-community/whisper-small.en|custom)
+  model_en: 'list(none|auto|nemo-parakeet-tdt-0.6b-v2|nemo-parakeet-rnnt-0.6b|nemo-parakeet-ctc-0.6b|onnx-community/whisper-base.en|onnx-community/whisper-tiny.en|onnx-community/whisper-small.en|custom)
+
+    '
   custom_model_en: str?
-  model_multilingual: |
-    list(none|auto|whisper-base|onnx-community/whisper-base|onnx-community/whisper-tiny|onnx-community/whisper-small|onnx-community/whisper-large-v3-turbo|custom)
+  model_multilingual: 'list(none|auto|whisper-base|onnx-community/whisper-base|onnx-community/whisper-tiny|onnx-community/whisper-small|onnx-community/whisper-large-v3-turbo|custom)
+
+    '
   custom_model_multilingual: str?
   debug_logging: bool
 ports:
-  "10300/tcp": null
+  10300/tcp: null
 homeassistant: 2025.7.1
-# image: tboby/{arch}-addon-onnx-asr
+image: ghcr.io/tboby/onnx-asr/{arch}
