@@ -1,309 +1,94 @@
-# Home Assistant Community Add-on: Advanced SSH & Web Terminal
+# Home Assistant Add-on: ONNX ASR
 
-This add-on allows you to log in to your Home Assistant instance using
-SSH or a Web Terminal, giving you to access your folders and
-also includes a command-line tool to do things like restart, update,
-and check your instance.
+This is a drop-in replacement for the Official Whisper Add-on, providing access to a different set of models.
 
-This is an enhanced version of the provided
-[SSH add-on by Home Assistant][hass-ssh] and focuses on security,
-usability, flexibility and also provides access using a web interface.
+It may also run certain whisper models faster depending on your CPU.
 
-## WARNING
+## ⚠️ Warning—Memory intense in default configuration
 
-The advanced SSH & Web Terminal add-on is very powerful and gives you access
-to almost all tools and hardware of your system.
+It's strongly recommended you only use this Add-on on systems with more than 8GB of RAM.
 
-While this add-on is created and maintained with care and with security in mind,
-in the wrong or inexperienced hands, it could damage your system.
+When configured in auto, the english model uses 2.5GB at all times.
 
-## Features
-
-This add-on, of course, provides an SSH server, based on [OpenSSH][openssh] and
-a web-based Terminal (which can be included in your Home Assistant frontend) as
-well. Additionally, it comes out of the box with the following:
-
-- Access your command line right from the Home Assistant frontend!
-- A secure default configuration of SSH:
-  - Only allows login by the configured user, even if more users are created.
-  - Only uses known secure ciphers and algorithms.
-  - Limits login attempts to hold off brute-force attacks better.
-- Comes with an SSH compatibility mode option to allow older clients to connect.
-- Support for Mosh allowing roaming and supports intermittent connectivity.
-- SFTP support is disabled by default but is user configurable.
-- Compatible if Home Assistant was installed via the generic Linux installer.
-- Username is configurable, so `root` is no longer mandatory.
-- Persists custom SSH client settings & keys between add-on restarts
-- Log levels for allowing you to triage issues easier.
-- Hardware access to your audio, uart/serial devices and GPIO pins.
-- Runs with more privileges, allowing you to debug and test more situations.
-- Has access to the dbus of the host system.
-- Has the option to access the Docker instance running on the host system.
-- Runs on host level network, allowing you to open ports or run little daemons.
-- Have custom Alpine packages installed on start. This allows you to install
-  your favorite tools, which will be available every single time you log in.
-- Execute custom commands on add-on start so that you can customize the
-  shell to your likings.
-- [ZSH][zsh] as its default shell. Easier to use for the beginner, more advanced
-  for the more experienced user. It even comes preloaded with
-  ["Oh My ZSH"][ohmyzsh], with some plugins enabled as well.
-- Contains a sensible set of tools right out of the box: curl, Wget, RSync, GIT,
-  Nmap, Mosquitto client, MariaDB/MySQL client, Awake (“wake on LAN”), Nano,
-  Vim, tmux, and a bunch commonly used networking tools.
+When configured in auto, the multilingual mode uses 1GB at all times.
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Home Assistant add-on.
+Follow these steps to get the add-on installed on your system:
 
-1. Click the Home Assistant My button below to open the add-on on your Home
-   Assistant instance.
+1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
+2. Find the "ONNX ASR" add-on and click it.
+3. Click on the "INSTALL" button.
 
-   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
+## How to use
 
-1. Click the "Install" button to install the add-on.
-1. Configure the `username` and `password`/`authorized_keys` options.
-1. Start the "Advanced SSH & Web Terminal" add-on.
-1. Check the logs of the "Advanced SSH & Web Terminal" add-on to see if everything
-   went well.
+After this add-on is installed and running, it will be automatically discovered
+by the Wyoming integration in Home Assistant. To finish the setup,
+click the following my button:
+
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=wyoming)
+
+Alternatively, you can install the Wyoming integration manually, see the
+[Wyoming integration documentation](https://www.home-assistant.io/integrations/wyoming/)
+for more information.
 
 ## Configuration
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+### Option: `model_en`
 
-SSH add-on configuration:
+ONNX ASR model that will be used for English transcription. Choose `custom` to use the model name in `custom_model`, which may be a HuggingFace model ID like "Systran/faster-distil-whisper-small.en".
 
-```yaml
-log_level: info
-ssh:
-  username: homeassistant
-  password: ""
-  authorized_keys:
-    - ssh-ed25519 AASDJKJKJFWJFAFLCNALCMLAK234234.....
-  sftp: false
-  compatibility_mode: false
-  allow_agent_forwarding: false
-  allow_remote_port_forwarding: false
-  allow_tcp_forwarding: false
-zsh: true
-share_sessions: true
-packages:
-  - build-base
-init_commands:
-  - ls -la
-```
+The default model is `auto`, which selects `nemo-parakeet-tdt-0.6b-v2` for English-only configurations, or `whisper-base` for multi-language configurations.
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
+Available models, english only:
 
-### Option: `log_level`
+- `auto` (select author's most efficient model)
+- `nemo-parakeet-tdt-0.6b-v2`
+- `nemo-parakeet-rnnt-0.6b`
+- `nemo-parakeet-ctc-0.6b`
+- `onnx-community/whisper-base.en`
+- `onnx-community/whisper-tiny.en`
+- `onnx-community/whisper-small.en`
+- `whisper-base`
 
-The `log_level` option controls the level of log output by the addon and can
-be changed to be more or less verbose, which might be useful when you are
-dealing with an unknown issue. Possible values are:
+### Option: `model_multilingual`
 
-- `trace`: Show every detail, like all called internal functions.
-- `debug`: Shows detailed debug information.
-- `info`: Normal (usually) interesting events.
-- `warning`: Exceptional occurrences that are not errors.
-- `error`: Runtime errors that do not require immediate action.
-- `fatal`: Something went terribly wrong. Add-on becomes unusable.
+ONNX ASR model that will be used for non-english transcription. Choose `custom` to use the model name in `custom_model`, which may be a HuggingFace model ID like "Systran/faster-distil-whisper-small.en".
 
-Please note that each level automatically includes log messages from a
-more severe level, e.g., `debug` also shows `info` messages. By default,
-the `log_level` is set to `info`, which is the recommended setting unless
-you are troubleshooting.
+The default model is `auto`, which selects `whisper-base` for multi-language configurations, which is slightly slower than parakeet but supports a wide range of languages.
 
-Using `trace` or `debug` log levels puts the SSH and Terminal daemons into
-debug mode. While SSH is running in debug mode, it will be only able to
-accept one single connection at the time.
+Available models:
 
-### Option group `ssh`
+- `auto` (select based on CPU)
+- `whisper-base`
+- `onnx-community/whisper-tiny`
+- `onnx-community/whisper-base`
+- `onnx-community/whisper-small`
+- `onnx-community/whisper-large-v3-turbo`
 
----
+[Performance of supported languages](https://github.com/openai/whisper#available-models-and-languages)
 
-The following options are for the option group: `ssh`. These settings
-only apply to the SSH daemon.
+### Option: `custom_model_en`
 
-#### Option `ssh`: `username`
+HuggingFace Hub model ID like "nvidia/stt_en_conformer_ctc_large". Only models supported by onnx-asr will work.
 
-This option allows you to change to username the use when you log in via SSH.
-It is only utilized for the authentication; you will be the `root` user after
-you have authenticated. Using `root` as the username is possible, but not
-recommended. Usernames will be converted to lower case as per recommended
-practises.
+### Option: `custom_model_multilingual`
 
-**Note**: _Due to limitations, you will need to set this option to `root` in
-order to be able to enable the SFTP capabilities._
+HuggingFace Hub model ID like "nvidia/stt_en_conformer_ctc_large". Only models supported by onnx-asr will work.
 
-#### Option `ssh`: `password`
+## Backups
 
-Sets the password to log in with. Leaving it empty would disable the possibility
-to authenticate with a password. We would highly recommend not to use this
-option from a security point of view.
-
-#### Option `ssh` `authorized_keys`
-
-Add one or more public keys to your SSH server to use with authentication.
-This is the recommended over setting a password.
-
-Please take a look at the awesome [documentation created by GitHub][github-ssh]
-about using public/private key pairs and how to create them.
-
-**Note**: _Please ensure the keys are specified as a list by pasting within the
-`[]` comma delimited._
-
-#### Option `ssh`: `sftp`
-
-When set to `true` the addon will enable SFTP support on the SSH daemon.
-Please only enable it when you plan on using it.
-
-**Note**: _Due to limitations, you will need to set the username to `root` in
-order to be able to enable the SFTP capabilities._
-
-#### Option `ssh`: `compatibility_mode`
-
-This SSH add-on focuses on security and has therefore only enabled known
-secure encryption methods. However, some older clients do not support these.
-Setting this option to `true` will enable the original default set of methods,
-allowing those clients to connect.
-
-**Note**: _Enabling this option, lowers the security of your SSH server!_
-
-#### Option `ssh`: `allow_agent_forwarding`
-
-Specifies whether ssh-agent forwarding is permitted or not.
-
-**Note**: _Enabling this option, lowers the security of your SSH server!
-Nevertheless, this warning is debatable._
-
-#### Option `ssh`: `allow_remote_port_forwarding`
-
-Specifies whether remote hosts are allowed to connect to ports forwarded
-for the client.
-
-**Note**: _Enabling this affects all remote forwardings, so think carefully
-before doing this._
-
-#### Option `ssh`: `allow_tcp_forwarding`
-
-Specifies whether TCP forwarding is permitted or not.
-
-**Note**: _Enabling this option, lowers the security of your SSH server!
-Nevertheless, this warning is debatable._
-
-### Shared settings
-
----
-
-The following options are shared between both the SSH and the Web Terminal.
-
-#### Option: `zsh`
-
-The add-on has ZSH pre-installed and configured as the default shell.
-However, ZSH might not be your preferred choice. By setting this option to
-`false`, you will disable ZSH and the add-on will fallback to Bash instead.
-
-#### Option: `share_sessions`
-
-By default, the terminal session between the web client and SSH is shared.
-This allows you to pick up where you left your terminal from either of those.
-
-This option allows you to disable this behavior by setting it to `false`, which
-effectively sets SSH to behave as it used to be.
-
-#### Option: `packages`
-
-Allows you to specify additional [Alpine packages][alpine-packages] to be
-installed in your shell environment (e.g., Python, Joe, Irssi).
-
-**Note**: _Adding many packages will result in a longer start-up
-time for the add-on._
-
-#### Option: `init_commands`
-
-Customize your shell environment even more with the `init_commands` option.
-Add one or more shell commands to the list, and they will be executed every
-single time this add-on starts.
-
-## Known issues and limitations
-
-- When SFTP is enabled, the username MUST be set to `root`.
-- If you want to use rsync for file transfer, the username MUST be set to
-  `root`.
-
-## Changelog & Releases
-
-This repository keeps a change log using [GitHub's releases][releases]
-functionality.
-
-Releases are based on [Semantic Versioning][semver], and use the format
-of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
-based on the following:
-
-- `MAJOR`: Incompatible or major changes.
-- `MINOR`: Backwards-compatible new features and enhancements.
-- `PATCH`: Backwards-compatible bugfixes and package updates.
+Model files can be large, so they are automatically excluded from backups and re-downloaded on restore for remote models.
+After restoring a backup with a local custom model, manually copy your model directory again.
 
 ## Support
 
 Got questions?
 
-You have several options to get them answered:
+People on the [Home Assistant Discord Chat Server][discord] may be able to help.
 
-- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
-  support and feature requests.
-- The [Home Assistant Discord chat server][discord-ha] for general Home
-  Assistant discussions and questions.
-- The Home Assistant [Community Forum][forum].
-- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+In case you've found an bug, please [open an issue on our GitHub][issue].
 
-You could also [open an issue here][issue] GitHub.
-
-## Authors & contributors
-
-The original setup of this repository is by [Franck Nijhof][frenck].
-
-For a full list of all authors and contributors,
-check [the contributors page][contributors].
-
-## License
-
-MIT License
-
-Copyright (c) 2017-2025 Franck Nijhof
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-[addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_ssh&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
-[alpine-packages]: https://pkgs.alpinelinux.org/packages
-[contributors]: https://github.com/hassio-addons/addon-ssh/graphs/contributors
-[discord-ha]: https://discord.gg/c5DvZ4e
-[discord]: https://discord.me/hassioaddons
-[forum]: https://community.home-assistant.io/t/community-hass-io-add-on-ssh-web-terminal/33820?u=frenck
-[frenck]: https://github.com/frenck
-[github-ssh]: https://help.github.com/articles/connecting-to-github-with-ssh/
-[hass-ssh]: https://github.com/home-assistant/addons/tree/master/ssh
-[issue]: https://github.com/hassio-addons/addon-ssh/issues
-[ohmyzsh]: http://ohmyz.sh/
-[openssh]: https://www.openssh.com/
-[reddit]: https://reddit.com/r/homeassistant
-[releases]: https://github.com/hassio-addons/addon-ssh/releases
-[semver]: https://semver.org/spec/v2.0.0.html
-[zsh]: https://en.wikipedia.org/wiki/Z_shell
+[discord]: https://discord.gg/c5DvZ4e
+[issue]: https://github.com/tboby/wyoming-onnx-asr/issues
+[repository]: https://github.com/tboby/wyoming-onnx-asr
