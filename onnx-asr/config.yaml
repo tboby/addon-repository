@@ -1,4 +1,4 @@
-version: 0.1.4
+version: 0.2.0
 slug: onnx-asr
 name: ONNX ASR
 description: Speech-to-text with ONNX ASR
@@ -22,7 +22,7 @@ schema:
 
     '
   custom_model_en: str?
-  model_multilingual: 'list(none|auto|whisper-base|onnx-community/whisper-base|onnx-community/whisper-tiny|onnx-community/whisper-small|onnx-community/whisper-large-v3-turbo|custom)
+  model_multilingual: 'list(none|auto|nemo-parakeet-tdt-0.6b-v3|whisper-base|onnx-community/whisper-base|onnx-community/whisper-tiny|onnx-community/whisper-small|onnx-community/whisper-large-v3-turbo|custom)
 
     '
   custom_model_multilingual: str?

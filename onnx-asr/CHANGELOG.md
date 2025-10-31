@@ -1,5 +1,9 @@
 ## What’s changed
 
-## 🐛 Bug fixes
+## 🚨 Breaking changes
 
-- Update wyoming onnx asr version to remove "en" from multilingual @tboby ([#4](https://github.com/tboby/onnx-asr-addon/pull/4))
+- Update to add parakeet v3 @tboby ([#5](https://github.com/tboby/onnx-asr-addon/pull/5))
+
+## 🚀 Enhancements
+
+- Update to add parakeet v3 @tboby ([#5](https://github.com/tboby/onnx-asr-addon/pull/5))

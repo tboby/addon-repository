@@ -10,7 +10,7 @@ It's strongly recommended you only use this Add-on on systems with more than 8GB
 
 When configured in auto, the english model uses 2.5GB at all times.
 
-When configured in auto, the multilingual mode uses 1GB at all times.
+When configured in auto, the multilingual mode uses 2.5GB at all times.
 
 ## Installation
 
@@ -38,7 +38,7 @@ for more information.
 
 ONNX ASR model that will be used for English transcription. Choose `custom` to use the model name in `custom_model`, which may be a HuggingFace model ID like "Systran/faster-distil-whisper-small.en".
 
-The default model is `auto`, which selects `nemo-parakeet-tdt-0.6b-v2` for English-only configurations, or `whisper-base` for multi-language configurations.
+The default model is `auto`, which selects `nemo-parakeet-tdt-0.6b-v2` for English-only configurations, or `nemo-parakeet-tdt-0.6b-v3` for multi-language configurations.
 
 Available models, english only:
 
@@ -55,11 +55,12 @@ Available models, english only:
 
 ONNX ASR model that will be used for non-english transcription. Choose `custom` to use the model name in `custom_model`, which may be a HuggingFace model ID like "Systran/faster-distil-whisper-small.en".
 
-The default model is `auto`, which selects `whisper-base` for multi-language configurations, which is slightly slower than parakeet but supports a wide range of languages.
+The default model is `auto`, which selects `nemo-parakeet-tdt-0.6b-v3` for multi-language configurations, which has slightly worse english performance than v2 but supports a wide range of languages.
 
 Available models:
 
-- `auto` (select based on CPU)
+- `auto` (select author's most efficient model)
+- `nemo-parakeet-tdt-0.6b-v3`
 - `whisper-base`
 - `onnx-community/whisper-tiny`
 - `onnx-community/whisper-base`
