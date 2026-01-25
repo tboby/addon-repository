@@ -1,9 +1,5 @@
-## What’s changed
+## What's Changed
+* Update wyoming-onnx-asr to 0.5.0 by @tboby in https://github.com/tboby/onnx-asr-addon/pull/6
 
-## 🚨 Breaking changes
 
-- Update to add parakeet v3 @tboby ([#5](https://github.com/tboby/onnx-asr-addon/pull/5))
-
-## 🚀 Enhancements
-
-- Update to add parakeet v3 @tboby ([#5](https://github.com/tboby/onnx-asr-addon/pull/5))
+**Full Changelog**: https://github.com/tboby/onnx-asr-addon/compare/v0.1.5...v0.3.0

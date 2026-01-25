@@ -46,6 +46,7 @@ Available models, english only:
 - `nemo-parakeet-tdt-0.6b-v2`
 - `nemo-parakeet-rnnt-0.6b`
 - `nemo-parakeet-ctc-0.6b`
+- `nemo-canary-1b-v2`
 - `onnx-community/whisper-base.en`
 - `onnx-community/whisper-tiny.en`
 - `onnx-community/whisper-small.en`
@@ -61,6 +62,7 @@ Available models:
 
 - `auto` (select author's most efficient model)
 - `nemo-parakeet-tdt-0.6b-v3`
+- `nemo-canary-1b-v2`
 - `whisper-base`
 - `onnx-community/whisper-tiny`
 - `onnx-community/whisper-base`
