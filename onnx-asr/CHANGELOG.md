@@ -1,5 +1,5 @@
-## What's Changed
-* Update wyoming-onnx-asr to 0.5.0 by @tboby in https://github.com/tboby/onnx-asr-addon/pull/6
+## What’s changed
 
+## 🐛 Bug fixes
 
-**Full Changelog**: https://github.com/tboby/onnx-asr-addon/compare/v0.1.5...v0.3.0
+- Prevent model being backed up @tboby ([#7](https://github.com/tboby/onnx-asr-addon/pull/7))
