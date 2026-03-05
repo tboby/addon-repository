@@ -4,4 +4,4 @@ addons:
   onnx-asr:
     repository: tboby/onnx-asr-addon
     target: onnx-asr
-    image: ghcr.io/tboby/onnx-asr/{arch}
+    image: ghcr.io/tboby/wyoming-onnx-asr:v0.4.0 # or pin to latest

@@ -30,4 +30,4 @@ schema:
 ports:
   10300/tcp: null
 homeassistant: 2025.7.1
-image: ghcr.io/tboby/onnx-asr/{arch}
+image: ghcr.io/tboby/wyoming-onnx-asr:v0.4.0 # or just pin to latest
